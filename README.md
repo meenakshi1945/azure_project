@@ -2,6 +2,18 @@
 
 This project is a Python web application built using Flask. The user can log in and out and create/edit articles. An article consists of a title, author, and body of text stored in an Azure SQL Server along with an image that is stored in Azure Blob Storage. You will also implement OAuth2 with Sign in with Microsoft using the `msal` library, along with app logging.
 
+## Current Submission Status
+
+The application code has been updated for the required authentication and logging work:
+
+- Microsoft sign-in is implemented in `FlaskWebProject/views.py` using `msal`.
+- Successful and unsuccessful login attempts are logged.
+- Logging is configured in `FlaskWebProject/__init__.py`.
+- Azure settings are read from environment variables in `config.py`.
+- `WRITEUP.md` compares VM deployment and Azure App Service deployment, and chooses App Service.
+
+I was not able to complete the live Azure deployment because I could not get access to an active Azure subscription. Azure for Students could not verify my university ID, and the regular Azure Free Account signup did not accept my card during payment verification. I included `AZURE_ACCOUNT_ISSUE_NOTE.md` with more detail about this issue.
+
 ## Log In Credentials for FlaskWebProject
 
 - Username: admin
@@ -52,9 +64,14 @@ This folder contains sample screenshots that students are required to submit in 
 1. A free Azure account
 2. A GitHub account
 3. Python 3.10
-4. Visual Studio 2019 Community Edition (Free)
+4. Visual Studio Code
 5. The latest Azure CLI (helpful; not required - all actions can be done in the portal)
 
-All Python dependencies are stored in the requirements.txt file. To install them, using Visual Studio 2019 Community Edition:
-1. In the Solution Explorer, expand "Python Environments"
-2. Right-click on "Python 3.10 (64-bit) (global default)" and select "Install from requirements.txt"
+All Python dependencies are stored in `requirements.txt`. To install them in VS Code:
+
+```powershell
+py -3.10 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip setuptools wheel
+pip install -r requirements.txt
+```
