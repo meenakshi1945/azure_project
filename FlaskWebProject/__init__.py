@@ -17,7 +17,8 @@ logging.basicConfig(
 )
 app.logger.setLevel(logging.INFO)
 
-Session(app)
+if app.config['USE_FLASK_SESSION']:
+    Session(app)
 db = SQLAlchemy(app)
 login = LoginManager(app)
 login.login_view = 'login'

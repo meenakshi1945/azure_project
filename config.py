@@ -11,14 +11,18 @@ class Config(object):
     BLOB_CONTAINER = os.environ.get('BLOB_CONTAINER') or 'ENTER_IMAGES_CONTAINER_NAME'
 
     # Azure SQL Database settings
-    SQL_SERVER = os.environ.get('SQL_SERVER') or 'ENTER_SQL_SERVER_NAME.database.windows.net'
-    SQL_DATABASE = os.environ.get('SQL_DATABASE') or 'ENTER_SQL_DB_NAME'
-    SQL_USER_NAME = os.environ.get('SQL_USER_NAME') or 'ENTER_SQL_SERVER_USERNAME'
-    SQL_PASSWORD = os.environ.get('SQL_PASSWORD') or 'ENTER_SQL_SERVER_PASSWORD'
-    SQLALCHEMY_DATABASE_URI = (
-        f'mssql+pyodbc://{SQL_USER_NAME}@{SQL_SERVER}:{SQL_PASSWORD}'
-        f'@{SQL_SERVER}:1433/{SQL_DATABASE}?driver=ODBC+Driver+17+for+SQL+Server'
-    )
+    SQL_SERVER = os.environ.get('SQL_SERVER')
+    SQL_DATABASE = os.environ.get('SQL_DATABASE')
+    SQL_USER_NAME = os.environ.get('SQL_USER_NAME')
+    SQL_PASSWORD = os.environ.get('SQL_PASSWORD')
+
+    if SQL_SERVER and SQL_DATABASE and SQL_USER_NAME and SQL_PASSWORD:
+        SQLALCHEMY_DATABASE_URI = (
+            f'mssql+pyodbc://{SQL_USER_NAME}:{SQL_PASSWORD}'
+            f'@{SQL_SERVER}:1433/{SQL_DATABASE}?driver=ODBC+Driver+17+for+SQL+Server'
+        )
+    else:
+        SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Microsoft sign-in settings
@@ -28,3 +32,5 @@ class Config(object):
     REDIRECT_PATH = "/getAToken"
     SCOPE = ["User.Read"]
     SESSION_TYPE = "filesystem"
+    SESSION_FILE_DIR = os.path.join(basedir, 'flask_session')
+    USE_FLASK_SESSION = os.environ.get('USE_FLASK_SESSION') == 'true'

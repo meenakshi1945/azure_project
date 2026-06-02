@@ -4,3 +4,4 @@ __pycache__/
 *.py[cod]
 flask_session/
 .pytest_cache/
+app.db

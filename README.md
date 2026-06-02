@@ -10,6 +10,8 @@ The application code has been updated for the required authentication and loggin
 - Successful and unsuccessful login attempts are logged.
 - Logging is configured in `FlaskWebProject/__init__.py`.
 - Azure settings are read from environment variables in `config.py`.
+- The SQLAlchemy connection string was corrected to use the required `username:password@server` format.
+- Local SQLite setup and local login log testing scripts were added for logging evidence without Azure.
 - `WRITEUP.md` compares VM deployment and Azure App Service deployment, and chooses App Service.
 
 I was not able to complete the live Azure deployment because I could not get access to an active Azure subscription. Azure for Students could not verify my university ID, and the regular Azure Free Account signup did not accept my card during payment verification. I included `AZURE_ACCOUNT_ISSUE_NOTE.md` with more detail about this issue.
